@@ -8,7 +8,10 @@
 #ifndef DSSTRING_H
 #define DSSTRING_H
 
+#include <vector>
+
 #include <iostream>
+
 
 class DSString
 {
@@ -24,7 +27,7 @@ public:
      * To help you get started, you can implement the following:
      **/
 
-    DSString();
+    DSString(); // default constructor
     DSString(const char *); // constructor that converts a cstring
     // you can also provide  DSString(const std::string &); for std::string
 
@@ -90,6 +93,10 @@ public:
     // you may want to add a find(...) function that will search for a
     // substring within a string or a function that breaks a string into words.
     // You will need a split or tokenize function.
+
+    std::vector<DSString> tokenize(); 
+
+
 };
 
 #endif
