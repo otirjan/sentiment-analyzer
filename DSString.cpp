@@ -87,6 +87,33 @@ DSString DSString::operator+(const DSString &line) const{ //adds the string from
 
 }
 
+bool DSString::operator==(const DSString &lengthOfEqualsSign) const{
+
+    if(len != lengthOfEqualsSign.len){
+        return 0;
+    }
+
+    for(size_t i = 0; i < len; i++){
+        if(data[i] != lengthOfEqualsSign[i]){
+            return 0;
+        }
+    }
+    return 1; 
+}
+
+bool DSString::operator<(const DSString &lengthOfLessThanSign) const{
+
+    for(size_t i = 0; i < len; i++){
+
+        if(i == lengthOfLessThanSign.length() - 1){ return 0; }
+        if(data[i] < lengthOfLessThanSign[i]){ return 0; }
+        else if(data[i] > lengthOfLessThanSign[i]) { return 1; }
+        
+    }//end for loop
+    return 1;
+}//end func
+
+
 
 
 
