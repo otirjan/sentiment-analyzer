@@ -113,10 +113,36 @@ bool DSString::operator<(const DSString &lengthOfLessThanSign) const{
     return 1;
 }//end func
 
+//returns a new string object that contains a sequence of characters from this string object.
+DSString DSString::substring(const size_t start, const size_t numChars) const{
+
+    char temporaryCString[numChars + 1];
+
+    for(size_t i=0; i < numChars; i++){
+        temporaryCString[i] = data[start  + i];
+    }
+    temporaryCString[numChars] = '\0'; 
+
+    return temporaryCString;
+
+}//end 
 
 
+//Returns a new string object with all characters in lowercase
+DSString DSString::toLower() const{
 
-
+    DSString temporaryHolder(data);
+    
+    for(size_t i = 0; i < len; i++){
+        
+        if(data[i] >= 'A' && data[i] <= 'Z'){ //check if the character is uppercase 
+            temporaryHolder[i] = data[i] + 32; //convert to lowercase by adding 32 to its ASCII value
+        } else {
+            temporaryHolder[i] = data[i]; //if its not uppercase, just copy the character
+        }
+    }
+    return temporaryHolder;
+}; 
 
 
 
