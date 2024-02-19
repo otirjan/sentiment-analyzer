@@ -1,5 +1,5 @@
 #include "DSString.h"
-#include <cstring>
+
 
 
 /* 
@@ -144,6 +144,12 @@ DSString DSString::toLower() const{
     return temporaryHolder;
 }; 
 
+char *DSString::c_str() const { return data;}
+
+std::ostream &operator<<(std::ostream &output, const DSString &str){
+    output << str.data;
+    return output;
+}
 
 
 
