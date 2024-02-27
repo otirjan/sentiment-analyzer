@@ -22,23 +22,25 @@ data[0] = '\0';
 
 DSString::DSString(const char *str){ //constructor that converts a cstring
 
-    len = strlen(str);
-    data = new char[len + 1]; 
-    data[len] = '\0';
-
-    for (size_t i = 0; i < len; i++){
-        data[i] = str[i];
+//manual calculation of c-string length
+    len = 0;
+    while (str[len] != '\0'){
+        len++;
     }
-}; 
+    data = new char[len + 1]; //allocate memory for c-string and the null terminator
+    for (size_t i = 0; i < len; i++){
+        data[i] = str[i]; //copy characters
+    }
+    data[len] = '\0';//ensure data is null-terminated
+}
 
 DSString::DSString(const DSString &str){ // copy constructor
     len = str.len;
     data = new char[len + 1];
-    data[len] = '\0';
-
     for(size_t i = 0; i < len; i++){
-        data[i] = str[i];
+        data[i] = str.data[i];
     }
+    data[len] = '\0';
 }//end func
 
 DSString::~DSString(){ //destructor
@@ -54,63 +56,66 @@ DSString &DSString::operator=(const DSString &str){ //assignment operator
         data[len] = '\0';
 
         for (size_t i = 0; i < len; i++){
-            data[i] = str[i];
+            data[i] = str.data[i];
         }
     }
     return *this;
  }
+//consider changing this to the swap method
+
 
 size_t DSString::length() const{ //returns the length of the string
     return len; 
 }
 
-char &DSString::operator[](size_t index) const{
+char &DSString::operator[](size_t index){
     return data[index];
 }
 
 DSString DSString::operator+(const DSString &line) const{ //adds the string from the line of data to the new string 
-   int length = 1 + len + line.len;
-    char *strContents = new char[length];
-    strContents[length] = '\0';
+   int newLength = len + line.len; //calculate the new length
+    char *newContents = new char[newLength + 1]; //allocate memory for new c-string
 
-    for ((size_t) i = 0; i < len; i++){
-    strContents[i] = data[i];
+    for (size_t i = 0; i < len; i++){
+    newContents[i] = data[i]; //copy this string's data
     }
     
     for (size_t i = 0; i < line.len; i++) {
-            strContents[i+len] = line.data[i];
+            newContents[len + i] = line.data[i]; //concatenate the other string's data
         }
 
-    DSString temporaryHolder = strContents;
-    delete[] strContents;
-    return temporaryHolder;
+    newContents[newLength] = '\0'; //null terminate the new string
+
+    DSString result(newContents); //use the constructor to create a new DSString
+    delete[] newContents; //clean up the temporary c-string
+    return result;
 
 }
 
 bool DSString::operator==(const DSString &lengthOfEqualsSign) const{
 
     if(len != lengthOfEqualsSign.len){
-        return 0;
+        return false;
     }
 
     for(size_t i = 0; i < len; i++){
-        if(data[i] != lengthOfEqualsSign[i]){
-            return 0;
+        if(data[i] != lengthOfEqualsSign.data[i]){
+            return false;
         }
     }
-    return 1; 
+    return true; 
 }
 
 bool DSString::operator<(const DSString &lengthOfLessThanSign) const{
 
     for(size_t i = 0; i < len; i++){
 
-        if(i == lengthOfLessThanSign.length() - 1){ return 0; }
-        if(data[i] < lengthOfLessThanSign[i]){ return 0; }
-        else if(data[i] > lengthOfLessThanSign[i]) { return 1; }
+        if(i == lengthOfLessThanSign.length() - 1){ return false; }
+        if(data[i] < lengthOfLessThanSign.data[i]){ return true; }
+        else if(data[i] > lengthOfLessThanSign.data[i]) { return true; }
         
     }//end for loop
-    return 1;
+    return true;
 }//end func
 
 //returns a new string object that contains a sequence of characters from this string object.
@@ -123,7 +128,8 @@ DSString DSString::substring(const size_t start, const size_t numChars) const{
     }
     temporaryCString[numChars] = '\0'; 
 
-    return temporaryCString;
+    DSString result(temporaryCString);
+    return result;
 
 }//end 
 
@@ -150,6 +156,53 @@ std::ostream &operator<<(std::ostream &output, const DSString &str){
     output << str.data;
     return output;
 }
+
+
+
+// Tokenizes the DSString into a vector of DSStrings based on whitespace characters 
+std::vector<DSString> DSString::tokenize() {
+
+    //store the length of the DSString to tokenize
+    size_t lengthOfToken = len;
+
+    //initialize a vector to hold the tokens
+    std::vector<DSString> tokens;
+
+    //initialize starting point of a potential token
+    size_t startingPoint = 0;
+
+    //iterate over each character in the DSString
+    for(size_t i = 0; i < lengthOfToken; i++){
+        //check if current character is a whitespace 
+        if(isspace(data[i])){
+
+            //if there is a non-empty token ending here, extract it
+            if(i > startingPoint){
+                //extract token using substring starting from startingPoint
+                DSString word = this->substring(startingPoint, i - startingPoint);
+             // Update the starting point for the next token to be right after the current whitespace.
+                startingPoint = i+1;
+            //add the extracted token to the tokens vector 
+                tokens.push_back(word);
+            }
+        }
+        
+    }
+
+    // After the loop, check if there's a token at the end of the string not followed by whitespace
+    if(startingPoint < lengthOfToken){
+        //extract the final token
+        DSString word = this->substring(startingPoint, len - startingPoint);
+        tokens.push_back(word);
+    }
+
+    return tokens;
+
+}
+
+
+
+
 
 
 
