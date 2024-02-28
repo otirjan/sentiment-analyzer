@@ -108,20 +108,23 @@ bool DSString::operator==(const DSString &lengthOfEqualsSign) const{
 
 bool DSString::operator<(const DSString &lengthOfLessThanSign) const{
 
-    for(size_t i = 0; i < len; i++){
+    
+        //iterate up to the shorter of the two string lengths
+        size_t minLength = std::min(len, lengthOfLessThanSign.len);
 
-        if(i == lengthOfLessThanSign.length() - 1){ return false; }
+    for(size_t i = 0; i < minLength; i++){
         if(data[i] < lengthOfLessThanSign.data[i]){ return true; }
-        else if(data[i] > lengthOfLessThanSign.data[i]) { return true; }
-        
+        else if(data[i] > lengthOfLessThanSign.data[i]) { return false; }
     }//end for loop
-    return true;
+    // If all characters so far were equal between the substrings being compared, the shorter string is "less than" the longer one
+    return len < lengthOfLessThanSign.len;
 }//end func
 
 //returns a new string object that contains a sequence of characters from this string object.
 DSString DSString::substring(const size_t start, const size_t numChars) const{
 
-    char temporaryCString[numChars + 1];
+    //char temporaryCString[numChars + 1];
+    char* temporaryCString = new char[numChars + 1];
 
     for(size_t i=0; i < numChars; i++){
         temporaryCString[i] = data[start  + i];
@@ -130,6 +133,8 @@ DSString DSString::substring(const size_t start, const size_t numChars) const{
 
     DSString result(temporaryCString);
     return result;
+    delete[] temporaryCString;
+    temporaryCString = nullptr; //avoid dangling pointer
 
 }//end 
 
@@ -148,7 +153,7 @@ DSString DSString::toLower() const{
         }
     }
     return temporaryHolder;
-}; 
+}
 
 char *DSString::c_str() const { return data;}
 
@@ -176,7 +181,7 @@ std::vector<DSString> DSString::tokenize() {
         //check if current character is a whitespace 
         if(isspace(data[i])){
 
-            //if there is a non-empty token ending here, extract it
+            //if there is a non-empty token here, extract it
             if(i > startingPoint){
                 //extract token using substring starting from startingPoint
                 DSString word = this->substring(startingPoint, i - startingPoint);

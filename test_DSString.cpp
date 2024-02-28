@@ -57,5 +57,13 @@ int main()
     std::cout << "found ddd: " << binary_search(strings.begin(), strings.end(), DSString("ddd")) << "\n";
     std::cout << "found z: " << binary_search(strings.begin(), strings.end(), DSString("z")) << "\n";
 
+//new
+    std::cout << "\n";
+    DSString tokenString = "t3his is thE string THAT I'm going! throu7gh ";
+    std::vector<DSString> v = tokenString.tokenize();
+
+    for(size_t i = 0; i < v.size(); i++)
+        std::cout << v[i] <<std::endl;
+
     return 0;
 }
