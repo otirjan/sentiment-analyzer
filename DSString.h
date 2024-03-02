@@ -94,6 +94,14 @@ public:
     // substring within a string or a function that breaks a string into words.
     // You will need a split or tokenize function.
 
+    // Returns the last character of the string
+    char back() const; 
+
+    static const size_t npos = -1;  // Represents an invalid position
+    // Finds the last occurrence of the character 'ch' starting from position 'pos'
+    // Returns the position of 'ch' or npos if not found
+    size_t find(char ch, size_t pos = npos) const;
+
     std::vector<DSString> tokenize(); 
 
 

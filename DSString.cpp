@@ -162,6 +162,26 @@ std::ostream &operator<<(std::ostream &output, const DSString &str){
     return output;
 }
 
+char DSString::back() const {
+    return data[len - 1];
+}
+
+
+size_t DSString::find(char ch, size_t pos = npos) const {
+    if (len == 0) return npos; //checks if string is empty
+
+    // if pos>= len, then i = len - 1 aka the last valid index of the string. 
+    // ^ this ensures you don't start the search beyond the string's bounds
+    // if pos>=len is false, then i = pos. Pos is thus a valid index to start the search from
+    for (size_t i = (pos >= len ? len - 1 : pos); i != npos; --i){
+        
+        if(data[i] == ch) return i; // If the current character matches `ch`, return the current position `i`
+        if (i == 0) break;
+    }
+    // If the character `ch` is not found, return `npos`
+    return npos;
+}
+
 
 
 // Tokenizes the DSString into a vector of DSStrings based on whitespace characters 
