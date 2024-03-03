@@ -182,6 +182,24 @@ size_t DSString::find(char ch, size_t pos = npos) const {
     return npos;
 }
 
+//lowercase all words and remove punctuation
+DSString DSString::cleanString(DSString str){
+        // size of string
+        size_t lenOfStr = str.length();
+        size_t now = 0;
+        str = str.toLower();
+
+        for(size_t i = 0; i < lenOfStr; i++){
+            if(!ispunct(str[i]) && !isdigit(str[i]) && str[i] != '\''){
+                str[now] = str[i];
+                now++;
+            }
+        }
+
+        return str.substring(0,now);
+    }
+
+
 
 
 // Tokenizes the DSString into a vector of DSStrings based on whitespace characters 

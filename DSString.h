@@ -102,6 +102,8 @@ public:
     // Returns the position of 'ch' or npos if not found
     size_t find(char ch, size_t pos = npos) const;
 
+    DSString cleanString(DSString); 
+
     std::vector<DSString> tokenize(); 
 
 
