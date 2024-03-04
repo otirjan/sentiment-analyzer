@@ -80,6 +80,7 @@ public:
     char *c_str() const;
 
     // a conversion to std::string would also be nice: string string() const;
+    std::string toStdString() const; 
 
     /**
      * Overloaded stream insertion operator to print the contents of this
@@ -100,11 +101,12 @@ public:
     static const size_t npos = -1;  // Represents an invalid position
     // Finds the last occurrence of the character 'ch' starting from position 'pos'
     // Returns the position of 'ch' or npos if not found
+    
     size_t find(char ch, size_t pos = npos) const;
 
-    DSString cleanString(DSString); 
+    DSString cleanString(const DSString&); 
 
-    std::vector<DSString> tokenize(); 
+    std::vector<DSString> tokenize(char delimiter); 
 
 
 };

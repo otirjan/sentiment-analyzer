@@ -157,6 +157,11 @@ DSString DSString::toLower() const{
 
 char *DSString::c_str() const { return data;}
 
+// Construct std::string from DSString's data and length
+std::string DSString::toStdString() const {
+    return std::string(this->data, this->len);  
+}
+
 std::ostream &operator<<(std::ostream &output, const DSString &str){
     output << str.data;
     return output;
@@ -167,7 +172,8 @@ char DSString::back() const {
 }
 
 
-size_t DSString::find(char ch, size_t pos = npos) const {
+size_t DSString::find(char ch, size_t pos) const{
+    
     if (len == 0) return npos; //checks if string is empty
 
     // if pos>= len, then i = len - 1 aka the last valid index of the string. 
@@ -183,66 +189,50 @@ size_t DSString::find(char ch, size_t pos = npos) const {
 }
 
 //lowercase all words and remove punctuation
-DSString DSString::cleanString(DSString str){
-        // size of string
-        size_t lenOfStr = str.length();
-        size_t now = 0;
-        str = str.toLower();
+DSString DSString::cleanString(const DSString& original) {
+    DSString result; // New DSString object to hold the cleaned string
+    DSString lowercased = original.toLower(); // Convert the original string to lowercase
 
-        for(size_t i = 0; i < lenOfStr; i++){
-            if(!ispunct(str[i]) && !isdigit(str[i]) && str[i] != '\''){
-                str[now] = str[i];
-                now++;
-            }
+    for (size_t i = 0; i < lowercased.length(); i++) {
+        char currentChar = lowercased[i];
+        if (!ispunct(currentChar) && !isdigit(currentChar) && currentChar != '\'') {
+            char tempStr[2] = {currentChar, '\0'}; // Create a temporary C-string
+            result = result + DSString(tempStr); // Use the DSString constructor that accepts a const char*
         }
-
-        return str.substring(0,now);
     }
 
+    return result;
+}
 
 
 
-// Tokenizes the DSString into a vector of DSStrings based on whitespace characters 
-std::vector<DSString> DSString::tokenize() {
 
-    //store the length of the DSString to tokenize
-    size_t lengthOfToken = len;
+// Tokenizes the DSString into a vector of DSStrings based on commas
+std::vector<DSString> DSString::tokenize(char delimiter){
 
-    //initialize a vector to hold the tokens
+    //size_t lengthOfToken = len;
     std::vector<DSString> tokens;
-
-    //initialize starting point of a potential token
     size_t startingPoint = 0;
 
     //iterate over each character in the DSString
-    for(size_t i = 0; i < lengthOfToken; i++){
-        //check if current character is a whitespace 
-        if(isspace(data[i])){
+    for(size_t i = 0; i <= len; ++i){
+        //check if current character is a comma or end of token
+        if(data[i] == delimiter|| i == len){
 
-            //if there is a non-empty token here, extract it
+            //ensure token length is positive
             if(i > startingPoint){
-                //extract token using substring starting from startingPoint
-                DSString word = this->substring(startingPoint, i - startingPoint);
-             // Update the starting point for the next token to be right after the current whitespace.
-                startingPoint = i+1;
-            //add the extracted token to the tokens vector 
-                tokens.push_back(word);
+                
+                DSString word = this->substring(startingPoint, i - startingPoint); //extract token using substring starting from startingPoint
+                
+                tokens.push_back(word); //add the extracted token to the tokens vector 
             }
+                startingPoint = i+1; // Update the start index to the next character after the whitespace/comma
         }
         
     }
-
-    // After the loop, check if there's a token at the end of the string not followed by whitespace
-    if(startingPoint < lengthOfToken){
-        //extract the final token
-        DSString word = this->substring(startingPoint, len - startingPoint);
-        tokens.push_back(word);
-    }
-
     return tokens;
 
-}
-
+} 
 
 
 

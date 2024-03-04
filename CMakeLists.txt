@@ -21,6 +21,7 @@ set(CMAKE_CXX_STANDARD 17)
 set (input01 "data/train_dataset_20k.csv")
 set (input02 "data/test_dataset_10k.csv")
 set (input03 "data/test_dataset_sentiment_10k.csv")
+set (input04 "data/mini_train_dataset_fortesting.csv")
 
 ##########################################
 
@@ -34,7 +35,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 add_compile_options(-Wall -Wextra -pedantic)
 
 # Create the executable (s)
-add_executable(sentiment main.cpp DSString.cpp)
+add_executable(sentiment main.cpp DSString.cpp SentimentAnalyzer.cpp)
 
 add_executable(test_DSString test_DSString.cpp DSString.cpp)
 
