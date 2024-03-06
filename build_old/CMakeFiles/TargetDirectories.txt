@@ -1,0 +1,4 @@
+/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build/CMakeFiles/sentiment.dir
+/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build/CMakeFiles/test_DSString.dir
+/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build/CMakeFiles/edit_cache.dir
+/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build/CMakeFiles/rebuild_cache.dir

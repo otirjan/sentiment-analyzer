@@ -26,35 +26,5 @@ private:
 
 
 
-/*
-#include <map>
-#include <set>
-#include <algorithm>
-#include <iomanip>
-#include "DSString.h"
-#include<iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include <sstream>
 
-using namespace std;
-
-class SentimentAnalyzer{
-private:
-   DSString cleanedTweetPos, cleanedTweetNeg;
-    DSString DSposTweet;
-    DSString DSnegTweet;
-    vector <DSString> allPositiveTokens;
-    vector <DSString> allNegativeTokens;
-    vector <DSString> wordsPos;
-    vector <DSString> wordsNeg;
-    map<DSString, int> Words;
-
-public:
-    void readfile(const char*);
-    DSString getFinalEntry(const DSString&); 
-    void processTweets(); 
-}; 
-*/
 #endif

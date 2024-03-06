@@ -207,7 +207,7 @@ DSString DSString::cleanString(const DSString& original) {
 
 
 
-// Tokenizes the DSString into a vector of DSStrings based on commas
+// Tokenizes the DSString into a vector of DSStrings based on either commas or spaces
 std::vector<DSString> DSString::tokenize(char delimiter){
 
     //size_t lengthOfToken = len;
@@ -215,9 +215,9 @@ std::vector<DSString> DSString::tokenize(char delimiter){
     size_t startingPoint = 0;
 
     //iterate over each character in the DSString
-    for(size_t i = 0; i <= len; ++i){
-        //check if current character is a comma or end of token
-        if(data[i] == delimiter|| i == len){
+    for(size_t i = 0; i < len; ++i){
+        //check if current character is the delimiter
+        if(data[i] == delimiter){
 
             //ensure token length is positive
             if(i > startingPoint){
@@ -228,8 +228,13 @@ std::vector<DSString> DSString::tokenize(char delimiter){
             }
                 startingPoint = i+1; // Update the start index to the next character after the whitespace/comma
         }
-        
+        // Handle the last token, which ends at the end of the string
     }
+    if (startingPoint < len) {
+    DSString word = this->substring(startingPoint, len - startingPoint);
+    tokens.push_back(word);
+    }
+        
     return tokens;
 
 } 

@@ -12,9 +12,14 @@ int main(int argc, char** argv)
         return 1;
     }
    
-    SentimentAnalyzer sa;
+    
     DSString trainingDataFile = argv[1]; 
+    DSString testingDataFile = argv[2];
+    DSString outputPredictionsFile = argv[3];
+
+    SentimentAnalyzer sa;
     sa.train(trainingDataFile);
+    sa.predict(testingDataFile, outputPredictionsFile);
 
     
 

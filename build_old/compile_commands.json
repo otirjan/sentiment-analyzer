@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build",
+  "command": "/usr/bin/g++ -g -Wall -Wextra -pedantic -std=gnu++1y -o CMakeFiles/sentiment.dir/main.cpp.o -c /users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/main.cpp",
+  "file": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/main.cpp"
+},
+{
+  "directory": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build",
+  "command": "/usr/bin/g++ -g -Wall -Wextra -pedantic -std=gnu++1y -o CMakeFiles/sentiment.dir/DSString.cpp.o -c /users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/DSString.cpp",
+  "file": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/DSString.cpp"
+},
+{
+  "directory": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build",
+  "command": "/usr/bin/g++ -g -Wall -Wextra -pedantic -std=gnu++1y -o CMakeFiles/sentiment.dir/SentimentAnalyzer.cpp.o -c /users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/SentimentAnalyzer.cpp",
+  "file": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/SentimentAnalyzer.cpp"
+},
+{
+  "directory": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build",
+  "command": "/usr/bin/g++ -g -Wall -Wextra -pedantic -std=gnu++1y -o CMakeFiles/test_DSString.dir/test_DSString.cpp.o -c /users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/test_DSString.cpp",
+  "file": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/test_DSString.cpp"
+},
+{
+  "directory": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/build",
+  "command": "/usr/bin/g++ -g -Wall -Wextra -pedantic -std=gnu++1y -o CMakeFiles/test_DSString.dir/DSString.cpp.o -c /users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/DSString.cpp",
+  "file": "/users7/cse/ltirjan/assignment-2-don-t-be-sentimental-otirjan/DSString.cpp"
+}
+]
