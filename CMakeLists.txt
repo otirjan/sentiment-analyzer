@@ -18,10 +18,13 @@ set(CMAKE_CXX_STANDARD 17)
 #   set (input02 "train_target.csv")
 # etc....
 # if you need more, add them here and in the foreach stmt below.
+
 set (input01 "data/train_dataset_20k.csv")
 set (input02 "data/test_dataset_10k.csv")
 set (input03 "data/test_dataset_sentiment_10k.csv")
-set (input04 "data/mini_train_dataset_fortesting.csv")
+
+
+
 
 ##########################################
 
